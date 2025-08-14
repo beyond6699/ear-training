@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>和弦调性练习器</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="chord-type-style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎼 和弦调性练习器</h1>
+            <p>通过听辨和弦来识别调性类型（大三、小三、7和弦等）</p>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="location.href='index.html'">单音符识别</button>
+                <button class="nav-btn" onclick="location.href='chord-practice.html'">和弦识别</button>
+                <button class="nav-btn active" onclick="location.href='chord-type-practice.html'">和弦调性</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="practice-area">
+                <div class="controls">
+                    <button id="playChord" class="btn btn-primary">播放和弦</button>
+                    <button id="playArpeggio" class="btn btn-secondary">播放琶音</button>
+                    <button id="playReference" class="btn btn-accent">播放参考音</button>
+                </div>
+
+                <div class="difficulty-selector">
+                    <label for="difficultySelect">难度选择：</label>
+                    <select id="difficultySelect">
+                        <option value="easy">简单模式（固定根音C）</option>
+                        <option value="hard">困难模式（变化根音）</option>
+                    </select>
+                </div>
+
+                <div class="question-info">
+                    <h3>请选择你听到的和弦调性：</h3>
+                    <div class="current-info">
+                        <div class="root-note">
+                            <span>根音：</span>
+                            <span id="rootNote">C</span>
+                        </div>
+                        <div class="chord-hint" id="chordHint">
+                            听辨和弦的调性特征
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chord-type-buttons">
+                    <div class="chord-type-grid">
+                        <button class="chord-type-btn" data-type="major">大三和弦</button>
+                        <button class="chord-type-btn" data-type="minor">小三和弦</button>
+                        <button class="chord-type-btn" data-type="diminished">减三和弦</button>
+                        <button class="chord-type-btn" data-type="augmented">增三和弦</button>
+                        <button class="chord-type-btn" data-type="major7">大七和弦</button>
+                        <button class="chord-type-btn" data-type="minor7">小七和弦</button>
+                        <button class="chord-type-btn" data-type="dominant7">属七和弦</button>
+                        <button class="chord-type-btn" data-type="halfdiminished7">半减七和弦</button>
+                        <button class="chord-type-btn" data-type="diminished7">减七和弦</button>
+                    </div>
+                </div>
+
+                <div class="answer-section">
+                    <div class="selected-type">
+                        <span>已选择：</span>
+                        <span id="selectedType">请选择和弦调性</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button id="clearSelection" class="btn btn-outline">清除选择</button>
+                        <button id="submitAnswer" class="btn btn-success" disabled>提交答案</button>
+                        <button id="newQuestion" class="btn btn-primary" disabled>下一题</button>
+                    </div>
+                </div>
+
+                <div id="result" class="result-message"></div>
+                
+                <!-- 半音关系图表 -->
+                <div id="chordIntervalChart" class="chord-interval-chart">
+                    <h4>和弦半音关系图</h4>
+                    <div class="interval-chart-container">
+                        <div class="interval-grid" id="intervalGrid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="score-display">
+                    <h3>练习统计</h3>
+                    <div class="score-grid">
+                        <div class="score-item">
+                            <span class="score-label">正确</span>
+                            <span class="score-value" id="correct">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">总计</span>
+                            <span class="score-value" id="total">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">准确率</span>
+                            <span class="score-value" id="accuracy">0%</span>
+                        </div>
+                    </div>
+                    <button id="resetStats" class="btn btn-outline btn-sm">重置统计</button>
+                </div>
+
+                <div class="detailed-stats">
+                    <h4>和弦调性统计详情</h4>
+                    <div class="stats-controls">
+                        <label for="statsDifficulty">查看难度：</label>
+                        <select id="statsDifficulty">
+                            <option value="all">全部难度</option>
+                            <option value="easy">简单模式</option>
+                            <option value="hard">困难模式</option>
+                        </select>
+                    </div>
+                    <div id="statsGrid" class="stats-grid"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="chord-type-script.js"></script>
+</body>
+</html>

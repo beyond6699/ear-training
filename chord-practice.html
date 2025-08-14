@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>和弦识别练习 - 半音阶版</title>
+    <link rel="stylesheet" href="chord-style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎹 和弦识别练习 - 半音阶版</h1>
+            <p>通过钢琴键盘识别C3-B4音域中的各种和弦来训练你的和声感</p>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="location.href='index.html'">单音符识别</button>
+                <button class="nav-btn active" onclick="location.href='chord-practice.html'">和弦识别</button>
+                <button class="nav-btn" onclick="location.href='chord-type-practice.html'">和弦调性</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="practice-area">
+                <div class="controls">
+                    <button id="playChord" class="btn btn-primary">播放和弦</button>
+                    <button id="playArpeggio" class="btn btn-secondary" disabled>播放琶音</button>
+                </div>
+
+                <div class="question-info">
+                    <h3>请在钢琴键盘上选择和弦的三个音符：</h3>
+                    <div class="chord-info">
+                        <span>和弦类型：</span>
+                        <span id="chordType">准备中...</span>
+                    </div>
+                    <p class="range-info">音域范围：C3 - B4（两个八度）</p>
+                </div>
+
+                <!-- 钢琴键盘 -->
+                <div class="piano-container">
+                    <div class="piano-keyboard" id="pianoKeyboard">
+                        <!-- 键盘将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+
+                <div class="answer-section">
+                    <div class="selected-notes">
+                        <span>已选择的音符：</span>
+                        <div id="selectedNotes">请选择3个音符</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button id="clearSelection" class="btn btn-outline">清除选择</button>
+                        <button id="submitAnswer" class="btn btn-success" disabled>提交答案</button>
+                        <button id="newQuestion" class="btn btn-primary" disabled>下一题</button>
+                    </div>
+                </div>
+
+                <div id="result" class="result-message"></div>
+                
+                <!-- 半音关系图表 -->
+                <div id="chordIntervalChart" class="chord-interval-chart">
+                    <h4>和弦半音关系图</h4>
+                    <div class="interval-chart-container">
+                        <div class="interval-grid" id="intervalGrid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="score-display">
+                    <h3>练习统计</h3>
+                    <div class="score-grid">
+                        <div class="score-item">
+                            <span class="score-label">正确</span>
+                            <span class="score-value" id="correct">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">总计</span>
+                            <span class="score-value" id="total">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">准确率</span>
+                            <span class="score-value" id="accuracy">0%</span>
+                        </div>
+                    </div>
+                    <button id="resetStats" class="btn btn-outline btn-sm">重置统计</button>
+                </div>
+
+                <div class="detailed-stats">
+                    <h4>和弦类型统计详情</h4>
+                    <div id="statsGrid" class="stats-grid"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="chord-script.js"></script>
+</body>
+</html>

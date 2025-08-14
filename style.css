@@ -1,0 +1,725 @@
+/* 腾讯TD设计风格 */
+:root {
+    --td-brand-color: #0052d9;
+    --td-brand-color-hover: #266fe8;
+    --td-brand-color-active: #0034a6;
+    --td-success-color: #00a870;
+    --td-warning-color: #ed7b2f;
+    --td-error-color: #d54941;
+    --td-text-color-primary: #000000;
+    --td-text-color-secondary: #666666;
+    --td-text-color-placeholder: #bbbbbb;
+    --td-bg-color-page: #f3f3f3;
+    --td-bg-color-container: #ffffff;
+    --td-border-color: #e7e7e7;
+    --td-border-radius: 6px;
+    --td-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-color: var(--td-bg-color-page);
+    color: var(--td-text-color-primary);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background: var(--td-bg-color-container);
+    padding: 30px;
+    border-radius: var(--td-border-radius);
+    box-shadow: var(--td-shadow);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--td-brand-color);
+}
+
+header p {
+    font-size: 1.1rem;
+    color: var(--td-text-color-secondary);
+    margin-bottom: 20px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--td-brand-color);
+    background: transparent;
+    color: var(--td-brand-color);
+    border-radius: var(--td-border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav-btn:hover {
+    background: var(--td-brand-color-hover);
+    color: white;
+}
+
+.nav-btn.active {
+    background: var(--td-brand-color);
+    color: white;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    align-items: start;
+}
+
+.practice-area {
+    background: var(--td-bg-color-container);
+    padding: 30px;
+    border-radius: var(--td-border-radius);
+    box-shadow: var(--td-shadow);
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--td-border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: var(--td-brand-color);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--td-brand-color-hover);
+}
+
+.btn-secondary {
+    background: var(--td-text-color-secondary);
+    color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #555;
+}
+
+.btn-accent {
+    background: var(--td-warning-color);
+    color: white;
+}
+
+.btn-accent:hover:not(:disabled) {
+    background: #d4661f;
+}
+
+.btn-success {
+    background: var(--td-success-color);
+    color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+    background: #008a5d;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--td-brand-color);
+    border: 2px solid var(--td-brand-color);
+}
+
+.btn-outline:hover:not(:disabled) {
+    background: var(--td-brand-color);
+    color: white;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    min-width: auto;
+}
+
+.question-info {
+    margin-bottom: 30px;
+}
+
+.question-info h3 {
+    margin-bottom: 15px;
+    color: var(--td-text-color-primary);
+}
+
+.range-info {
+    color: var(--td-text-color-secondary);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: var(--td-border-radius);
+    border-left: 4px solid var(--td-brand-color);
+}
+
+.stats-controls select {
+    padding: 8px 12px;
+    border: 1px solid var(--td-border-color);
+    border-radius: var(--td-border-radius);
+    background: white;
+    font-size: 1rem;
+}
+
+.instrument-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.instrument-selector label {
+    font-weight: 500;
+    color: var(--td-text-color-secondary);
+}
+
+.instrument-selector select {
+    padding: 8px 12px;
+    border: 1px solid var(--td-border-color);
+    border-radius: var(--td-border-radius);
+    background: white;
+    font-size: 1rem;
+}
+
+.instrument-container {
+    margin: 30px 0;
+}
+
+/* 钢琴键盘样式 */
+.piano-container {
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: var(--td-border-radius);
+    overflow-x: auto;
+}
+
+.piano-keyboard {
+    position: relative;
+    display: block;
+    min-width: 800px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.piano-key {
+    cursor: pointer;
+    transition: all 0.1s ease;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    user-select: none;
+    position: absolute;
+}
+
+.piano-key.white {
+    width: 50px;
+    height: 200px;
+    background: white;
+    z-index: 1;
+    border-radius: 0 0 8px 8px;
+}
+
+.piano-key.black {
+    width: 30px;
+    height: 130px;
+    background: #333;
+    color: white;
+    z-index: 2;
+    border-radius: 0 0 6px 6px;
+}
+
+.piano-key.white:hover {
+    background: #f0f0f0;
+}
+
+.piano-key.black:hover {
+    background: #555;
+}
+
+.piano-key.white:active, .piano-key.white.pressed {
+    background: #e0e0e0;
+    transform: translateY(2px);
+}
+
+.piano-key.black:active, .piano-key.black.pressed {
+    background: #666;
+    transform: translateY(2px);
+}
+
+.piano-key.selected {
+    box-shadow: 0 0 10px var(--td-brand-color);
+}
+
+.piano-key.white.selected {
+    background: #e3f2fd;
+    border-color: var(--td-brand-color);
+}
+
+.piano-key.black.selected {
+    background: var(--td-brand-color);
+}
+
+.piano-key.correct {
+    animation: correctPulse 0.6s ease-in-out;
+}
+
+.piano-key.white.correct {
+    background: #e8f5e8;
+    border-color: var(--td-success-color);
+}
+
+.piano-key.black.correct {
+    background: var(--td-success-color);
+}
+
+.piano-key.incorrect {
+    animation: incorrectShake 0.6s ease-in-out;
+}
+
+.piano-key.white.incorrect {
+    background: #ffeaea;
+    border-color: var(--td-error-color);
+}
+
+.piano-key.black.incorrect {
+    background: var(--td-error-color);
+}
+
+@keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes incorrectShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* 吉他指板样式 */
+.guitar-container {
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: var(--td-border-radius);
+    overflow-x: auto;
+}
+
+.guitar-fretboard {
+    position: relative;
+    min-width: 1200px;
+    height: 300px;
+    background: linear-gradient(to bottom, #8B4513, #A0522D);
+    border-radius: 8px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 吉他弦 */
+.guitar-string {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, #C0C0C0, #808080);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.guitar-string:nth-child(1) { top: 25px; height: 3px; } /* E弦 */
+.guitar-string:nth-child(2) { top: 70px; height: 2.5px; } /* A弦 */
+.guitar-string:nth-child(3) { top: 115px; height: 2px; } /* D弦 */
+.guitar-string:nth-child(4) { top: 160px; height: 2px; } /* G弦 */
+.guitar-string:nth-child(5) { top: 205px; height: 2.5px; } /* B弦 */
+.guitar-string:nth-child(6) { top: 250px; height: 3px; } /* E弦 */
+
+/* 品丝 */
+.guitar-fret {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #FFD700, #DAA520);
+    box-shadow: 1px 0 2px rgba(0, 0, 0, 0.4);
+}
+
+/* 品位标记 */
+.fret-marker {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #FFF8DC;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.fret-marker.double {
+    width: 8px;
+    height: 8px;
+}
+
+.fret-marker.double:first-child {
+    top: 35%;
+}
+
+.fret-marker.double:last-child {
+    top: 65%;
+}
+
+/* 吉他音符按钮 */
+.guitar-note {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #333;
+    transition: all 0.2s ease;
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+
+.guitar-note:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.guitar-note.selected {
+    background: var(--td-brand-color);
+    color: white;
+    border-color: var(--td-brand-color);
+    box-shadow: 0 0 10px var(--td-brand-color);
+}
+
+.guitar-note.correct {
+    background: var(--td-success-color);
+    color: white;
+    border-color: var(--td-success-color);
+    box-shadow: 0 0 10px var(--td-success-color);
+    animation: correctPulse 0.6s ease-in-out;
+}
+
+.guitar-note.incorrect {
+    background: var(--td-error-color);
+    color: white;
+    border-color: var(--td-error-color);
+    box-shadow: 0 0 10px var(--td-error-color);
+    animation: incorrectShake 0.6s ease-in-out;
+}
+
+.guitar-note.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 弦标签 */
+.string-label {
+    position: absolute;
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    background: #333;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.answer-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: var(--td-border-radius);
+}
+
+.selected-note {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.selected-note span:first-child {
+    color: var(--td-text-color-secondary);
+}
+
+.selected-note span:last-child {
+    color: var(--td-brand-color);
+    font-weight: 600;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.result-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: var(--td-border-radius);
+    font-weight: 500;
+    text-align: center;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-message.correct {
+    background: #e8f5e8;
+    color: var(--td-success-color);
+    border: 1px solid var(--td-success-color);
+}
+
+.result-message.incorrect {
+    background: #ffeaea;
+    color: var(--td-error-color);
+    border: 1px solid var(--td-error-color);
+}
+
+.stats-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.score-display, .detailed-stats {
+    background: var(--td-bg-color-container);
+    padding: 25px;
+    border-radius: var(--td-border-radius);
+    box-shadow: var(--td-shadow);
+}
+
+.score-display h3, .detailed-stats h4 {
+    margin-bottom: 20px;
+    color: var(--td-brand-color);
+}
+
+.score-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.score-item {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: var(--td-border-radius);
+}
+
+.score-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--td-text-color-secondary);
+    margin-bottom: 5px;
+}
+
+.score-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--td-brand-color);
+}
+
+.stats-controls {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.stat-item {
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: var(--td-border-radius);
+    border-left: 4px solid var(--td-border-color);
+}
+
+.stat-item.high {
+    border-left-color: var(--td-error-color);
+}
+
+.stat-item.medium {
+    border-left-color: var(--td-warning-color);
+}
+
+.stat-item.low {
+    border-left-color: var(--td-success-color);
+}
+
+.stat-note {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.stat-rate, .stat-count, .stat-probability {
+    font-size: 0.9rem;
+    color: var(--td-text-color-secondary);
+    margin-bottom: 2px;
+}
+
+.stat-rate.high {
+    color: var(--td-error-color);
+    font-weight: 500;
+}
+
+.stat-rate.medium {
+    color: var(--td-warning-color);
+    font-weight: 500;
+}
+
+.stat-rate.low {
+    color: var(--td-success-color);
+    font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-section {
+        flex-direction: row;
+    }
+    
+    .score-display, .detailed-stats {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .practice-area {
+        padding: 20px;
+    }
+    
+    .controls {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .piano-keyboard {
+        min-width: 400px;
+        height: 150px;
+    }
+    
+    .piano-key {
+        font-size: 0.7rem;
+        padding-bottom: 8px;
+    }
+    
+    .stats-section {
+        flex-direction: column;
+    }
+    
+    .score-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .piano-keyboard {
+        min-width: 350px;
+        height: 120px;
+    }
+    
+    .piano-key {
+        font-size: 0.6rem;
+        padding-bottom: 6px;
+    }
+}
+
+/* 确保钢琴键盘在窗口大小改变时重新计算 */
+.piano-keyboard {
+    transition: none;
+}
+
+.piano-key {
+    box-sizing: border-box;
+}
