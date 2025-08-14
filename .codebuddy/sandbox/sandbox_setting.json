@@ -1,20 +1,20 @@
 {
-  "path": "c:\\Users\\lightrayli\\CodeBuddy\\20250812172504",
-  "desc": "这是一个完整的音感练习网页应用，包含三个模块：1）单音符识别练习（支持钢琴键盘和吉他指板）2）和弦识别练习（识别具体音符组合）3）和弦调性练习（识别和弦类型：大三、小三、7和弦等）。已修复和弦调性模块中的转位问题，确保和弦和琶音播放时根音始终在最低位置。",
-  "id": "3c70001ac9fc453db98319ee27672df6",
+  "path": "c:\\Users\\lightrayli\\codebuddy\\20250812172504",
+  "desc": "这是一个音感练习器前端项目，提供单音符识别、和弦识别和和弦调性练习功能。现已在和弦识别和和弦调性练习中都添加了半音关系图表功能。",
+  "id": "743bb0cda5d64981be583b49152260bd",
   "data": {
-    "spaceKey": "3c70001ac9fc453db98319ee27672df6",
+    "spaceKey": "743bb0cda5d64981be583b49152260bd",
     "connections": {
-      "webIDE": "https://3c70001ac9fc453db98319ee27672df6.ap-singapore.cloudstudio.club",
+      "webIDE": "https://743bb0cda5d64981be583b49152260bd.ap-singapore.cloudstudio.club",
       "preview": "",
-      "api": "https://3c70001ac9fc453db98319ee27672df6--api.ap-singapore.cloudstudio.club",
-      "pty": "https://3c70001ac9fc453db98319ee27672df6--pty.ap-singapore.cloudstudio.club"
+      "api": "https://743bb0cda5d64981be583b49152260bd--api.ap-singapore.cloudstudio.club",
+      "pty": "https://743bb0cda5d64981be583b49152260bd--pty.ap-singapore.cloudstudio.club"
     }
   },
   "config": {
-    "api": "https://3c70001ac9fc453db98319ee27672df6--api.ap-singapore.cloudstudio.club",
-    "pty": "https://3c70001ac9fc453db98319ee27672df6--pty.ap-singapore.cloudstudio.club",
+    "api": "https://743bb0cda5d64981be583b49152260bd--api.ap-singapore.cloudstudio.club",
+    "pty": "https://743bb0cda5d64981be583b49152260bd--pty.ap-singapore.cloudstudio.club",
     "region": "ap-shanghai",
-    "spaceKey": "3c70001ac9fc453db98319ee27672df6"
+    "spaceKey": "743bb0cda5d64981be583b49152260bd"
   }
 }
