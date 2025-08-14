@@ -27,12 +27,19 @@ body {
     background-color: var(--td-bg-color-page);
     color: var(--td-text-color-primary);
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -90,6 +97,7 @@ main {
     grid-template-columns: 1fr 350px;
     gap: 30px;
     align-items: start;
+    flex: 1;
 }
 
 .practice-area {
@@ -97,6 +105,11 @@ main {
     padding: 30px;
     border-radius: var(--td-border-radius);
     box-shadow: var(--td-shadow);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .controls {
@@ -104,6 +117,8 @@ main {
     gap: 15px;
     margin-bottom: 30px;
     flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
 }
 
 .btn {
@@ -168,6 +183,8 @@ main {
 
 .question-info {
     margin-bottom: 30px;
+    width: 100%;
+    text-align: center;
 }
 
 .question-info h3 {
@@ -216,13 +233,19 @@ main {
     background: #f8f8f8;
     border-radius: var(--td-border-radius);
     overflow-x: auto;
+    margin-bottom: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .piano-keyboard {
     position: relative;
     display: block;
-    min-width: 800px;
-    height: 200px;
+    min-width: 900px;
+    height: 220px;
     margin: 0 auto;
     transition: none;
 }
@@ -349,6 +372,8 @@ main {
     padding: 20px;
     background: #f8f9fa;
     border-radius: var(--td-border-radius);
+    width: 100%;
+    text-align: center;
 }
 
 .selected-notes {
@@ -511,6 +536,7 @@ main {
     background: #f8f9fa;
     border-radius: var(--td-border-radius);
     display: none; /* 默认隐藏，提交答案后显示 */
+    width: 100%;
 }
 
 .chord-interval-chart h4 {

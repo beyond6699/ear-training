@@ -1,5 +1,5 @@
 {
-  "envId": "",
+  "envId": "music-9goc332a2e37d5e7",
   "version": "2.0",
   "framework": {
     "name": "音乐练习中心",
@@ -7,7 +7,7 @@
       "client": {
         "use": "@cloudbase/framework-plugin-website",
         "inputs": {
-          "outputPath": "temp_deploy",
+          "outputPath": "C:\\Users\\lightrayli\\codebuddy\\20250812172504\\temp_deploy",
           "cloudPath": "/",
           "envVariables": {},
           "ignore": [".git", ".github", "node_modules", ".cloudbase"]

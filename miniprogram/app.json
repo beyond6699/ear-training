@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/chord-practice/chord-practice",
+    "pages/chord-type-practice/chord-type-practice",
+    "pages/fretboard-practice/fretboard-practice",
+    "pages/pitch-practice/pitch-practice"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0052d9",
+    "navigationBarTitleText": "音乐练习中心",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#0052d9",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/chord-practice/chord-practice",
+        "iconPath": "images/piano.png",
+        "selectedIconPath": "images/chord-active.png",
+        "text": "和弦练习"
+      },
+      {
+        "pagePath": "pages/fretboard-practice/fretboard-practice",
+        "iconPath": "images/guitar.png",
+        "selectedIconPath": "images/guitar-active.png",
+        "text": "指板熟悉"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

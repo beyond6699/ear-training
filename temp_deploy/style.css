@@ -92,6 +92,11 @@ main {
     align-items: start;
 }
 
+main.full-width {
+    display: block;
+    width: 100%;
+}
+
 .practice-area {
     background: var(--td-bg-color-container);
     padding: 30px;
@@ -638,6 +643,30 @@ main {
 .stat-rate.low {
     color: var(--td-success-color);
     font-weight: 500;
+}
+
+/* 简化的统计信息 */
+.mini-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: var(--td-border-radius);
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mini-stats span {
+    font-size: 1rem;
+    color: var(--td-text-color-secondary);
+}
+
+.mini-stats span span {
+    font-weight: 600;
+    color: var(--td-brand-color);
+    margin-left: 5px;
 }
 
 /* 响应式设计 */

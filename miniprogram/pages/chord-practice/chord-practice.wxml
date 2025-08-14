@@ -1,0 +1,72 @@
+<!--chord-practice.wxml-->
+<view class="container">
+  <view class="practice-area">
+    <view class="controls">
+      <button id="playChord" class="btn btn-primary" bindtap="playChord">播放和弦</button>
+      <button id="playArpeggio" class="btn btn-secondary" bindtap="playArpeggio" disabled="{{!canPlayArpeggio}}">播放琶音</button>
+    </view>
+
+    <view class="question-info">
+      <view class="subtitle">请在钢琴键盘上选择和弦的三个音符：</view>
+      <view class="chord-info">
+        <text>和弦类型：</text>
+        <text class="chord-type">{{chordType || '准备中...'}}</text>
+      </view>
+      <view class="range-info">音域范围：C3 - B4（两个八度）</view>
+    </view>
+
+    <!-- 钢琴键盘 -->
+    <view class="piano-container">
+      <view class="piano-keyboard" id="pianoKeyboard">
+        <block wx:for="{{pianoKeys}}" wx:key="id">
+          <view 
+            class="piano-key {{item.type}} {{item.selected ? 'selected' : ''}} {{item.state}}"
+            style="left: {{item.left}}px; width: {{item.width}}px; height: {{item.height}}px;"
+            data-note="{{item.note}}"
+            data-midi="{{item.midi}}"
+            bindtap="onKeyPress"
+          >
+            {{item.label}}
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="answer-section">
+      <view class="selected-notes">
+        <text>已选择的音符：</text>
+        <view class="selected-notes-display">{{selectedNotesText}}</view>
+      </view>
+      <view class="action-buttons">
+        <button class="btn btn-outline" bindtap="clearSelection">清除选择</button>
+        <button class="btn btn-success" bindtap="submitAnswer" disabled="{{!canSubmit}}">提交答案</button>
+        <button class="btn btn-primary" bindtap="newQuestion" disabled="{{!showNewQuestion}}">下一题</button>
+      </view>
+    </view>
+
+    <view class="result-message {{resultClass}}">{{resultMessage}}</view>
+    
+    <!-- 半音关系图表 -->
+    <view class="chord-interval-chart" wx:if="{{showIntervalChart}}">
+      <view class="subtitle">和弦半音关系图</view>
+      <view class="interval-chart-container">
+        <view class="interval-grid">
+          <block wx:for="{{intervalCells}}" wx:key="index">
+            <view class="interval-cell {{item.active ? 'active' : ''}} {{item.root ? 'root' : ''}}">
+              <view class="interval-cell-label">{{item.label}}</view>
+            </view>
+          </block>
+        </view>
+        <view class="chord-description">{{chordDescription}}</view>
+      </view>
+    </view>
+    
+    <!-- 简化的统计信息 -->
+    <view class="mini-stats">
+      <text>正确: {{correctCount}}</text>
+      <text>总计: {{totalCount}}</text>
+      <text>准确率: {{accuracy}}%</text>
+      <button class="btn btn-outline btn-sm" bindtap="resetStats">重置</button>
+    </view>
+  </view>
+</view>

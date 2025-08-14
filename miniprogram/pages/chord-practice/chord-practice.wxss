@@ -1,0 +1,306 @@
+/* chord-practice.wxss */
+.practice-area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+  justify-content: center;
+}
+
+.question-info {
+  margin-bottom: 30rpx;
+  width: 100%;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+}
+
+.chord-info {
+  margin-bottom: 15rpx;
+  font-size: 32rpx;
+}
+
+.chord-type {
+  color: var(--td-brand-color);
+  font-weight: 600;
+}
+
+.range-info {
+  font-size: 28rpx;
+  color: var(--td-text-color-secondary);
+}
+
+/* 钢琴键盘样式 */
+.piano-container {
+  margin: 30rpx 0;
+  padding: 20rpx;
+  background: #f8f8f8;
+  border-radius: var(--td-border-radius);
+  overflow-x: auto;
+  margin-bottom: 30rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.piano-keyboard {
+  position: relative;
+  display: block;
+  height: 440rpx;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 1200rpx;
+}
+
+.piano-key {
+  transition: all 0.1s ease;
+  border: 1rpx solid #ccc;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.piano-key.white {
+  background: white;
+  z-index: 1;
+  border-radius: 0 0 8rpx 8rpx;
+}
+
+.piano-key.black {
+  background: #333;
+  color: white;
+  z-index: 2;
+  border-radius: 0 0 6rpx 6rpx;
+}
+
+.piano-key.selected {
+  box-shadow: 0 0 10rpx var(--td-brand-color);
+}
+
+.piano-key.white.selected {
+  background: #e3f2fd;
+  border-color: var(--td-brand-color);
+}
+
+.piano-key.black.selected {
+  background: var(--td-brand-color);
+}
+
+.piano-key.correct {
+  animation: correctPulse 0.6s ease-in-out;
+}
+
+.piano-key.white.correct {
+  background: #e8f5e8;
+  border-color: var(--td-success-color);
+  box-shadow: 0 0 10rpx var(--td-success-color);
+}
+
+.piano-key.black.correct {
+  background: var(--td-success-color);
+  box-shadow: 0 0 10rpx var(--td-success-color);
+}
+
+.piano-key.white.correct.root {
+  background: #c8e6c9;
+  border-color: #00796b;
+  box-shadow: 0 0 15rpx #00796b;
+  border-width: 2rpx;
+}
+
+.piano-key.black.correct.root {
+  background: #00796b;
+  box-shadow: 0 0 15rpx #00796b;
+}
+
+.piano-key.incorrect {
+  animation: incorrectShake 0.6s ease-in-out;
+}
+
+.piano-key.white.incorrect {
+  background: #ffeaea;
+  border-color: var(--td-error-color);
+  box-shadow: 0 0 10rpx var(--td-error-color);
+}
+
+.piano-key.black.incorrect {
+  background: var(--td-error-color);
+  box-shadow: 0 0 10rpx var(--td-error-color);
+}
+
+@keyframes correctPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes incorrectShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5rpx); }
+  75% { transform: translateX(5rpx); }
+}
+
+.answer-section {
+  margin: 30rpx 0;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: var(--td-border-radius);
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.selected-notes {
+  margin-bottom: 20rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.selected-notes-display {
+  color: var(--td-brand-color);
+  font-weight: 600;
+  min-height: 48rpx;
+  padding: 16rpx 24rpx;
+  background: white;
+  border: 1rpx solid var(--td-border-color);
+  border-radius: var(--td-border-radius);
+  margin-top: 16rpx;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 30rpx;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.result-message {
+  margin-top: 20rpx;
+  padding: 30rpx;
+  border-radius: var(--td-border-radius);
+  font-weight: 500;
+  text-align: center;
+  min-height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-line;
+}
+
+.result-message.correct {
+  background: #e8f5e8;
+  color: var(--td-success-color);
+  border: 1rpx solid var(--td-success-color);
+}
+
+.result-message.incorrect {
+  background: #ffeaea;
+  color: var(--td-error-color);
+  border: 1rpx solid var(--td-error-color);
+}
+
+/* 半音关系图表样式 */
+.chord-interval-chart {
+  margin: 30rpx 0;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: var(--td-border-radius);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.interval-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.interval-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 4rpx;
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+.interval-cell {
+  height: 80rpx;
+  background: #e7e7e7;
+  border-radius: 8rpx;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.interval-cell.active {
+  background: var(--td-brand-color);
+}
+
+.interval-cell.root {
+  background: var(--td-success-color);
+}
+
+.interval-cell-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 20rpx;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--td-text-color-primary);
+  padding: 4rpx 0;
+  font-weight: 500;
+}
+
+.interval-cell.active .interval-cell-label {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--td-brand-color);
+}
+
+.interval-cell.root .interval-cell-label {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--td-success-color);
+}
+
+.chord-description {
+  margin-top: 30rpx;
+  text-align: center;
+  font-weight: 500;
+  color: var(--td-brand-color);
+  padding: 16rpx;
+  background: white;
+  border-radius: var(--td-border-radius);
+  border: 1rpx solid var(--td-border-color);
+}
+
+/* 统计信息 */
+.mini-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}

@@ -5,66 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>吉他指板熟悉度练习</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fretboard-style.css">
+    <style>
+        /* 在iframe中的特定样式 */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body.in-iframe {
+            height: auto;
+            min-height: 100%;
+        }
+        
+        .container.in-iframe {
+            height: auto;
+            padding: 10px;
+        }
+        
+        /* 调整吉他指板的大小 */
+        .in-iframe .fretboard-container {
+            margin: 20px 0;
+            padding: 15px;
+        }
+        
+        .in-iframe .fretboard {
+            min-height: 350px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>吉他指板熟悉度练习</h1>
-        <div class="nav-buttons">
-            <button class="nav-btn" onclick="location.href='index.html'">返回主页</button>
-            <button class="nav-btn active">吉他指板熟悉度</button>
-        </div>
-    </header>
-
-    <main>
-        <div class="controls">
-            <div class="settings">
-                <div class="setting-group">
-                    <label for="difficulty">难度：</label>
-                    <select id="difficulty">
-                        <option value="easy">简单 (只有自然音)</option>
-                        <option value="medium" selected>中等 (包含升降号)</option>
-                        <option value="hard">困难 (所有音名，更快节奏)</option>
-                    </select>
+    <script>
+        // 检测是否在iframe中
+        function inIframe() {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        }
+        
+        // 如果在iframe中，添加特定的类
+        if (inIframe()) {
+            document.body.classList.add('in-iframe');
+        }
+    </script>
+    <div class="container" id="mainContainer">
+        <script>
+            // 如果在iframe中，给container也添加特定的类
+            if (inIframe()) {
+                document.getElementById('mainContainer').classList.add('in-iframe');
+            }
+        </script>
+        <main class="full-width">
+            <div class="practice-area">
+                <div class="controls">
+                    <div class="setting-group">
+                        <label for="difficulty">难度：</label>
+                        <select id="difficulty" class="td-select">
+                            <option value="easy">简单 (只有自然音)</option>
+                            <option value="medium" selected>中等 (包含升降号)</option>
+                            <option value="hard">困难 (所有音名，更快节奏)</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label for="fret-range">品格范围：</label>
+                        <select id="fret-range" class="td-select">
+                            <option value="0-5">0-5品</option>
+                            <option value="0-12" selected>0-12品</option>
+                            <option value="0-15">0-15品</option>
+                        </select>
+                    </div>
+                    <button id="start-btn" class="btn btn-primary">开始练习</button>
+                    <button id="stop-btn" class="btn btn-secondary" disabled>停止</button>
                 </div>
-                <div class="setting-group">
-                    <label for="fret-range">品格范围：</label>
-                    <select id="fret-range">
-                        <option value="0-5">0-5品</option>
-                        <option value="0-12" selected>0-12品</option>
-                        <option value="0-15">0-15品</option>
-                    </select>
+
+                <div class="question-info">
+                    <h3 id="current-note">点击"开始练习"</h3>
+                    <div id="timer-bar"><div id="timer-progress"></div></div>
                 </div>
-                <button id="start-btn">开始练习</button>
-                <button id="stop-btn" disabled>停止</button>
-            </div>
-            <div class="stats">
-                <div>正确：<span id="correct-count">0</span></div>
-                <div>错误：<span id="wrong-count">0</span></div>
-                <div>准确率：<span id="accuracy">0%</span></div>
-            </div>
-        </div>
 
-        <div class="current-note-display">
-            <div id="current-note">点击"开始练习"</div>
-            <div id="timer-bar"><div id="timer-progress"></div></div>
-        </div>
+                <div class="fretboard-container">
+                    <div class="fretboard">
+                        <!-- 吉他指板将通过JavaScript动态生成 -->
+                    </div>
+                    <div class="fret-markers">
+                        <!-- 品位标记将通过JavaScript动态生成 -->
+                    </div>
+                </div>
 
-        <div class="fretboard-container">
-            <div class="fretboard">
-                <!-- 吉他指板将通过JavaScript动态生成 -->
+                <div id="feedback" class="result-message"></div>
+                
+                <!-- 简化的统计信息 -->
+                <div class="mini-stats">
+                    <span>正确: <span id="correct-count">0</span></span>
+                    <span>错误: <span id="wrong-count">0</span></span>
+                    <span>准确率: <span id="accuracy">0%</span></span>
+                </div>
             </div>
-            <div class="fret-markers">
-                <!-- 品位标记将通过JavaScript动态生成 -->
-            </div>
-        </div>
-
-        <div class="feedback" id="feedback"></div>
-    </main>
-
-    <footer>
-        <p>吉他指板熟悉度练习 - 提高您对吉他指板的记忆</p>
-    </footer>
+        </main>
+    </div>
 
     <script src="fretboard-script.js"></script>
 </body>

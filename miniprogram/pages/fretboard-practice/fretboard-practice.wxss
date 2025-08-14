@@ -1,0 +1,212 @@
+/* fretboard-practice.wxss */
+.practice-area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.setting-group {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.picker {
+  background-color: #ffffff;
+  padding: 10rpx 20rpx;
+  border-radius: 6rpx;
+  border: 1px solid var(--td-border-color);
+  min-width: 200rpx;
+}
+
+.question-info {
+  margin: 20rpx 0;
+  text-align: center;
+}
+
+.current-note {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.timer-bar {
+  height: 10rpx;
+  background-color: #ecf0f1;
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+
+.timer-progress {
+  height: 100%;
+  width: 100%;
+  background-color: var(--td-brand-color);
+  border-radius: 5rpx;
+  transition: width 0.1s linear;
+}
+
+/* 吉他指板样式 */
+.fretboard-container {
+  position: relative;
+  margin: 30rpx 0;
+  background: #f8f8f8;
+  border-radius: var(--td-border-radius);
+  padding: 30rpx 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fretboard {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(to bottom, #8B4513, #A0522D);
+  border-radius: 8rpx;
+  margin: 0 auto 20rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.3);
+  overflow: visible;
+  padding: 30rpx 0 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 600rpx;
+}
+
+/* 吉他弦样式 */
+.string {
+  position: relative;
+  height: 80rpx;
+  margin-bottom: 5rpx;
+  display: flex;
+  width: 100%;
+}
+
+/* 在每个弦上添加一条线 */
+.string::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2rpx;
+  background: linear-gradient(to right, #C0C0C0, #808080);
+  box-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+/* 调整不同弦的粗细 */
+.string:nth-child(1)::before { height: 1rpx; }
+.string:nth-child(2)::before { height: 1.5rpx; }
+.string:nth-child(3)::before { height: 2rpx; }
+.string:nth-child(4)::before { height: 2.5rpx; }
+.string:nth-child(5)::before { height: 3rpx; }
+.string:nth-child(6)::before { height: 3.5rpx; }
+
+/* 确保最后一根弦有足够的底部空间 */
+.string:last-child {
+  margin-bottom: 20rpx;
+}
+
+.fret {
+  background-color: transparent;
+  border-right: 2rpx solid #a0522d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+  height: 40rpx;
+  flex: 1;
+  z-index: 2;
+}
+
+.fret:first-child {
+  border-left: 4rpx solid #a0522d;
+}
+
+.fret.correct {
+  background-color: var(--td-success-color);
+}
+
+.fret.wrong {
+  background-color: var(--td-error-color);
+}
+
+.fret-markers {
+  display: flex;
+  position: relative;
+  height: 25rpx;
+  margin-top: 5rpx;
+  width: 100%;
+}
+
+.fret-marker {
+  position: absolute;
+  font-size: 22rpx;
+  color: var(--td-text-color-secondary);
+  transform: translateX(-50%);
+}
+
+/* 重要品位标记样式 */
+.fret-marker.important {
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 反馈区域 */
+.feedback {
+  text-align: center;
+  min-height: 100rpx;
+  margin-top: 20rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.feedback.correct {
+  color: var(--td-success-color);
+}
+
+.feedback.wrong {
+  color: var(--td-error-color);
+}
+
+/* 特殊标记 */
+.fret-dot {
+  position: relative;
+}
+
+.fret-dot::after {
+  content: "";
+  position: absolute;
+  width: 20rpx;
+  height: 20rpx;
+  background-color: #FFF8DC;
+  border-radius: 50%;
+  bottom: 10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 开放弦样式 */
+.open-string {
+  background-color: #f5f5f5;
+  border-right: 2rpx solid #bdc3c7;
+}
+
+/* 统计信息 */
+.mini-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+}

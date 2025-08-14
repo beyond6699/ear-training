@@ -9,6 +9,24 @@ const allNotes = ['C', 'C♯/D♭', 'D', 'D♯/E♭', 'E', 'F', 'F♯/G♭', 'G'
 // 自然音（不包含升降号）
 const naturalNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 
+// 音频上下文
+let audioContext;
+// 音符频率映射（基于A4 = 440Hz的标准音高）
+const noteFrequencies = {
+    'C': 261.63, // C4
+    'C♯/D♭': 277.18,
+    'D': 293.66,
+    'D♯/E♭': 311.13,
+    'E': 329.63,
+    'F': 349.23,
+    'F♯/G♭': 369.99,
+    'G': 392.00,
+    'G♯/A♭': 415.30,
+    'A': 440.00, // A4
+    'A♯/B♭': 466.16,
+    'B': 493.88
+};
+
 // 初始化变量
 let currentNote = '';
 let timerInterval = null;
@@ -37,19 +55,95 @@ document.addEventListener('DOMContentLoaded', () => {
     createFretboard();
     createFretMarkers();
     setupEventListeners();
+    initAudio();
 });
+
+// 初始化音频上下文
+function initAudio() {
+    try {
+        // 创建音频上下文
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioContext = new AudioContext();
+    } catch (e) {
+        console.warn('Web Audio API不受支持。', e);
+    }
+}
+
+// 播放音符
+function playNote(noteName) {
+    if (!audioContext) return;
+    
+    try {
+        // 如果音频上下文被暂停（浏览器策略），则恢复
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+        
+        // 处理包含升降号的音符
+        let frequency;
+        if (noteName.includes('/')) {
+            // 使用升号部分（第一个音符）
+            const sharpNote = noteName.split('/')[0];
+            frequency = noteFrequencies[sharpNote] || noteFrequencies['A'];
+        } else {
+            frequency = noteFrequencies[noteName] || noteFrequencies['A'];
+        }
+        
+        // 创建振荡器
+        const oscillator = audioContext.createOscillator();
+        oscillator.type = 'sine'; // 正弦波，接近纯音
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+        
+        // 创建增益节点（用于控制音量）
+        const gainNode = audioContext.createGain();
+        gainNode.gain.setValueAtTime(0.5, audioContext.currentTime); // 设置初始音量
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1.5); // 1.5秒后音量衰减
+        
+        // 连接节点
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // 开始播放
+        oscillator.start();
+        
+        // 1.5秒后停止
+        setTimeout(() => {
+            oscillator.stop();
+        }, 1500);
+    } catch (e) {
+        console.error('播放音符时出错:', e);
+    }
+}
 
 // 创建吉他指板
 function createFretboard() {
     // 清空现有内容
     fretboardElement.innerHTML = '';
     
-    // 从第1弦（最细的）开始创建到第6弦（最粗的）
+    // 创建一个包装器，用于确保所有弦都能完全显示
+    const fretboardWrapper = document.createElement('div');
+    fretboardWrapper.className = 'fretboard-wrapper';
+    fretboardWrapper.style.padding = '10px 0 30px'; // 增加底部内边距
+    fretboardElement.appendChild(fretboardWrapper);
+    
+    // 创建6根弦
     for (let stringIndex = 0; stringIndex < 6; stringIndex++) {
         const stringElement = document.createElement('div');
         stringElement.className = 'string';
         stringElement.dataset.string = stringIndex + 1;
         
+        // 为最后一根弦（低音弦）添加额外的底部间距
+        if (stringIndex === 5) {
+            stringElement.style.marginBottom = '20px';
+        }
+        
+        // 添加到包装器
+        fretboardWrapper.appendChild(stringElement);
+    }
+    
+    // 创建品位和音符
+    const strings = fretboardWrapper.querySelectorAll('.string');
+    strings.forEach((stringElement, stringIndex) => {
         // 为每个品位创建元素（0品到15品）
         for (let fretIndex = 0; fretIndex <= 15; fretIndex++) {
             const fretElement = document.createElement('div');
@@ -67,10 +161,7 @@ function createFretboard() {
             // 添加到弦
             stringElement.appendChild(fretElement);
         }
-        
-        // 添加到指板
-        fretboardElement.appendChild(stringElement);
-    }
+    });
     
     // 添加指板上的装饰点
     addFretboardDots();
@@ -98,13 +189,52 @@ function createFretMarkers() {
     // 清空现有内容
     fretMarkersElement.innerHTML = '';
     
-    // 创建0-15品的标记
-    for (let i = 0; i <= 15; i++) {
+    // 定义重要品位
+    const importantFrets = [3, 5, 7, 9, 12, 15];
+    
+    // 只创建重要品位的标记和0品标记
+    const fretsToShow = [0, ...importantFrets];
+    
+    // 计算品位的非线性分布（低品位间距小，高品位间距大）
+    const fretPositions = calculateFretPositions(16);
+    
+    // 创建品位标记
+    fretsToShow.forEach(i => {
         const markerElement = document.createElement('div');
         markerElement.className = 'fret-marker';
+        
+        // 如果是重要品位，添加特殊样式
+        if (importantFrets.includes(i)) {
+            markerElement.className += ' important';
+        }
+        
         markerElement.textContent = i;
+        
+        // 使用计算好的品位位置
+        const position = fretPositions[i] * 100;
+        markerElement.style.left = `${position}%`;
+        
         fretMarkersElement.appendChild(markerElement);
+    });
+}
+
+// 计算品位的非线性分布
+function calculateFretPositions(numFrets) {
+    // 创建一个数组来存储每个品位的相对位置（0到1之间）
+    const positions = [];
+    
+    // 使用公式计算每个品位的位置
+    // 吉他品位的实际物理位置遵循指数衰减规律
+    for (let i = 0; i < numFrets; i++) {
+        // 使用简化的公式：position = 1 - (2^(-i/12))
+        // 这模拟了真实吉他指板上品位的分布
+        positions[i] = 1 - Math.pow(2, -i/12);
+        
+        // 缩放到0-1范围
+        positions[i] = positions[i] / positions[numFrets - 1];
     }
+    
+    return positions;
 }
 
 // 设置事件监听器
@@ -221,6 +351,9 @@ function generateNewNote() {
     currentNoteDisplay.textContent = currentNote;
     feedbackDisplay.textContent = '';
     feedbackDisplay.className = 'feedback';
+    
+    // 播放音符声音
+    playNote(currentNote);
 }
 
 // 开始计时器
@@ -259,7 +392,7 @@ function startTimer() {
     }, 50);
 }
 
-// 处理品格点击
+    // 处理品格点击
 function handleFretClick(event) {
     if (!isPlaying) return;
     
@@ -271,6 +404,9 @@ function handleFretClick(event) {
     if (fretNumber < fretRange.min || fretNumber > fretRange.max) {
         return;
     }
+    
+    // 播放点击的音符
+    playNote(clickedNote);
     
     // 检查是否正确
     const isCorrect = checkNote(clickedNote, currentNote);
@@ -289,7 +425,10 @@ function handleFretClick(event) {
         setTimeout(() => {
             clickedFret.classList.remove('wrong');
         }, 1000);
-        showFeedback(false, '错误！');
+        
+        // 显示详细的错误信息，包括目标音符和选择的音符
+        let errorMessage = `错误！目标音符是 ${currentNote}，但你选择了 ${clickedNote}`;
+        showFeedback(false, errorMessage);
     }
     
     updateStats();
@@ -308,10 +447,22 @@ function handleFretClick(event) {
 
 // 检查音符是否匹配
 function checkNote(playedNote, targetNote) {
-    // 处理包含升降号的情况
+    // 处理目标音符包含升降号的情况
     if (targetNote.includes('/')) {
         const [sharp, flat] = targetNote.split('/');
+        // 处理用户选择的音符也包含升降号的情况
+        if (playedNote.includes('/')) {
+            const [playedSharp, playedFlat] = playedNote.split('/');
+            return playedSharp === sharp || playedSharp === flat || 
+                   playedFlat === sharp || playedFlat === flat;
+        }
         return playedNote === sharp || playedNote === flat;
+    }
+    
+    // 处理用户选择的音符包含升降号，但目标音符不包含的情况
+    if (playedNote.includes('/')) {
+        const [playedSharp, playedFlat] = playedNote.split('/');
+        return playedSharp === targetNote || playedFlat === targetNote;
     }
     
     return playedNote === targetNote;

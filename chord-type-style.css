@@ -27,12 +27,19 @@ body {
     background-color: var(--td-bg-color-page);
     color: var(--td-text-color-primary);
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -91,6 +98,7 @@ main {
     grid-template-columns: 1fr 350px;
     gap: 30px;
     align-items: start;
+    flex: 1;
 }
 
 .practice-area {
@@ -98,6 +106,11 @@ main {
     padding: 30px;
     border-radius: var(--td-border-radius);
     box-shadow: var(--td-shadow);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .controls {
@@ -105,6 +118,8 @@ main {
     gap: 15px;
     margin-bottom: 30px;
     flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
 }
 
 .btn {
@@ -185,6 +200,8 @@ main {
     background: #f8f9fa;
     border-radius: var(--td-border-radius);
     border-left: 4px solid var(--td-brand-color);
+    width: 100%;
+    justify-content: center;
 }
 
 .difficulty-selector label {
@@ -202,6 +219,8 @@ main {
 
 .question-info {
     margin-bottom: 30px;
+    width: 100%;
+    text-align: center;
 }
 
 .question-info h3 {
@@ -216,6 +235,8 @@ main {
     padding: 15px;
     background: #f8f9fa;
     border-radius: var(--td-border-radius);
+    width: 100%;
+    justify-content: center;
 }
 
 .root-note {
@@ -248,22 +269,24 @@ main {
 
 .chord-type-buttons {
     margin: 30px 0;
+    width: 100%;
 }
 
 .chord-type-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    width: 100%;
 }
 
 .chord-type-btn {
-    padding: 15px 20px;
+    padding: 18px 20px;
     border: 2px solid var(--td-border-color);
     background: white;
     color: var(--td-text-color-primary);
     border-radius: var(--td-border-radius);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
     transition: all 0.3s ease;
     text-align: center;
@@ -317,6 +340,8 @@ main {
     padding: 20px;
     background: #f8f9fa;
     border-radius: var(--td-border-radius);
+    width: 100%;
+    text-align: center;
 }
 
 .selected-type {
@@ -350,6 +375,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .result-message.correct {
@@ -485,6 +511,7 @@ main {
     background: #f8f9fa;
     border-radius: var(--td-border-radius);
     display: block; /* 默认显示 */
+    width: 100%;
 }
 
 .chord-interval-chart h4 {

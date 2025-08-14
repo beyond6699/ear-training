@@ -6,19 +6,69 @@
     <title>和弦调性练习器</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="chord-type-style.css">
+    <style>
+        /* 在iframe中的特定样式 */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body.in-iframe {
+            height: auto;
+            min-height: 100%;
+        }
+        
+        .container.in-iframe {
+            height: auto;
+            padding: 10px;
+        }
+        
+        /* 调整和弦按钮的大小 */
+        .in-iframe .chord-type-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .in-iframe .chord-type-btn {
+            padding: 12px 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* 调整和弦图表的大小 */
+        .in-iframe .chord-interval-chart {
+            margin: 15px 0;
+            padding: 15px;
+        }
+        
+        .in-iframe .interval-grid {
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🎼 和弦调性练习器</h1>
-            <p>通过听辨和弦来识别调性类型（大三、小三、7和弦等）</p>
-            <div class="nav-buttons">
-                <button class="nav-btn" onclick="location.href='index.html'">返回主页</button>
-                <button class="nav-btn active">和弦调性</button>
-            </div>
-        </header>
-
-        <main>
+    <script>
+        // 检测是否在iframe中
+        function inIframe() {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        }
+        
+        // 如果在iframe中，添加特定的类
+        if (inIframe()) {
+            document.body.classList.add('in-iframe');
+        }
+    </script>
+    <div class="container" id="mainContainer">
+        <script>
+            // 如果在iframe中，给container也添加特定的类
+            if (inIframe()) {
+                document.getElementById('mainContainer').classList.add('in-iframe');
+            }
+        </script>
+        <main class="full-width">
             <div class="practice-area">
                 <div class="controls">
                     <button id="playChord" class="btn btn-primary">播放和弦</button>
@@ -82,39 +132,13 @@
                         <div class="interval-grid" id="intervalGrid"></div>
                     </div>
                 </div>
-            </div>
-
-            <div class="stats-section">
-                <div class="score-display">
-                    <h3>练习统计</h3>
-                    <div class="score-grid">
-                        <div class="score-item">
-                            <span class="score-label">正确</span>
-                            <span class="score-value" id="correct">0</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="score-label">总计</span>
-                            <span class="score-value" id="total">0</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="score-label">准确率</span>
-                            <span class="score-value" id="accuracy">0%</span>
-                        </div>
-                    </div>
-                    <button id="resetStats" class="btn btn-outline btn-sm">重置统计</button>
-                </div>
-
-                <div class="detailed-stats">
-                    <h4>和弦调性统计详情</h4>
-                    <div class="stats-controls">
-                        <label for="statsDifficulty">查看难度：</label>
-                        <select id="statsDifficulty">
-                            <option value="all">全部难度</option>
-                            <option value="easy">简单模式</option>
-                            <option value="hard">困难模式</option>
-                        </select>
-                    </div>
-                    <div id="statsGrid" class="stats-grid"></div>
+                
+                <!-- 简化的统计信息 -->
+                <div class="mini-stats">
+                    <span>正确: <span id="correct">0</span></span>
+                    <span>总计: <span id="total">0</span></span>
+                    <span>准确率: <span id="accuracy">0%</span></span>
+                    <button id="resetStats" class="btn btn-outline btn-sm">重置</button>
                 </div>
             </div>
         </main>

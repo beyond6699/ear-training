@@ -97,25 +97,65 @@ function loadPracticeContent(practiceType) {
         const iframe = document.createElement('iframe');
         iframe.src = config.file;
         iframe.style.width = '100%';
-        iframe.style.height = '600px';
+        iframe.style.height = '100%';
+        iframe.style.minHeight = '800px'; // 增加最小高度，确保吉他指板完全显示
         iframe.style.border = 'none';
         iframe.style.borderRadius = '10px';
+        
+        // 为不同的练习类型设置特定的高度
+        if (practiceType === 'fretboard') {
+            iframe.style.minHeight = '900px'; // 吉他指板需要更多空间
+        } else if (practiceType === 'chord-type') {
+            iframe.style.minHeight = '1000px'; // 和弦调性练习需要更多空间显示半音阶图
+        }
         iframe.onload = () => {
             // iframe加载完成后的处理
             console.log(`${config.title} 加载完成`);
+            
+            // 尝试调整iframe高度以适应内容
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const resizeObserver = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        // 确保高度足够大，特别是对于吉他指板练习
+                        const height = Math.max(entry.target.scrollHeight, 800);
+                        iframe.style.height = `${height + 50}px`; // 添加额外的50px空间
+                    }
+                });
+                
+                resizeObserver.observe(iframeDoc.body);
+                
+                // 初始调整 - 确保最小高度
+                const initialHeight = Math.max(iframeDoc.body.scrollHeight, 800);
+                iframe.style.height = `${initialHeight + 50}px`;
+                
+                // 特殊处理吉他指板练习
+                if (practiceType === 'fretboard') {
+                    iframe.style.height = '900px'; // 为吉他指板设置更大的固定高度
+                }
+            } catch (e) {
+                console.log('无法自动调整iframe高度:', e);
+                
+                // 如果自动调整失败，为吉他指板设置更大的固定高度
+                if (practiceType === 'fretboard') {
+                    iframe.style.height = '900px';
+                }
+            }
         };
 
         practiceContent.innerHTML = `
             <div class="practice-header">
                 <h3>${config.title}</h3>
                 <p>${config.description}</p>
-                <button class="btn btn-outline" onclick="openInNewTab('${config.file}')">
-                    在新标签页中打开
-                </button>
             </div>
             <div class="iframe-container">
             </div>
         `;
+        
+        // 设置practiceContent为flex布局，使其能够自适应高度
+        practiceContent.style.display = 'flex';
+        practiceContent.style.flexDirection = 'column';
+        practiceContent.style.flex = '1';
 
         const iframeContainer = practiceContent.querySelector('.iframe-container');
         iframeContainer.appendChild(iframe);
@@ -221,6 +261,10 @@ const additionalCSS = `
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
 }
 
 .loading-container {

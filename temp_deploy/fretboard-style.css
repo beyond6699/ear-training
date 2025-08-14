@@ -1,119 +1,17 @@
-/* 基础样式 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Microsoft YaHei', Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-header {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-h1 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-nav {
-    margin: 10px 0;
-}
-
-nav a {
-    color: #3498db;
-    text-decoration: none;
-    margin: 0 10px;
-    padding: 5px 10px;
-    border-radius: 4px;
-    background-color: #eee;
-    transition: background-color 0.3s;
-}
-
-nav a:hover {
-    background-color: #ddd;
-}
-
-/* 控制区域样式 */
-.controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.settings {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    align-items: center;
-}
-
+/* 吉他指板练习特定样式 - 腾讯TD设计风格 */
 .setting-group {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
+    margin-right: 15px;
 }
 
-select, button {
+.td-select {
     padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 14px;
-}
-
-button {
-    cursor: pointer;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-button:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-}
-
-.stats {
-    display: flex;
-    gap: 15px;
-    font-size: 14px;
-}
-
-/* 当前音符显示区域 */
-.current-note-display {
-    text-align: center;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-#current-note {
-    font-size: 32px;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 15px;
+    border: 1px solid var(--td-border-color);
+    border-radius: var(--td-border-radius);
+    background: white;
+    font-size: 1rem;
 }
 
 #timer-bar {
@@ -121,49 +19,114 @@ button:disabled {
     background-color: #ecf0f1;
     border-radius: 5px;
     overflow: hidden;
+    margin-top: 15px;
 }
 
 #timer-progress {
     height: 100%;
     width: 100%;
-    background-color: #3498db;
+    background-color: var(--td-brand-color);
     border-radius: 5px;
     transition: width 0.1s linear;
 }
 
-/* 吉他指板样式 */
+/* 吉他指板样式 - 腾讯TD设计风格 */
 .fretboard-container {
     position: relative;
-    margin-bottom: 20px;
+    margin: 30px 0;
     overflow-x: auto;
+    background: #f8f8f8;
+    border-radius: var(--td-border-radius);
+    padding: 30px 20px; /* 增加上下内边距 */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .fretboard {
-    display: grid;
-    grid-template-rows: repeat(6, 1fr);
-    gap: 2px;
-    background-color: #8b4513; /* 琴颈颜色 */
-    border-radius: 4px;
-    padding: 5px;
-    min-width: 100%;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    background: linear-gradient(to bottom, #8B4513, #A0522D);
+    border-radius: 8px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: visible; /* 改为visible，防止内容被裁剪 */
+    padding: 30px 0; /* 增加上下内边距 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 350px; /* 确保有足够的高度 */
 }
 
+/* 吉他弦样式 */
 .string {
-    display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    gap: 2px;
-    height: 40px;
+    position: relative;
+    height: 50px; /* 进一步增加高度 */
+    margin-bottom: 0; /* 移除底部间距 */
+    display: flex;
+    width: 100%;
+}
+
+/* 在每个弦上添加一条线 */
+.string::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    background: linear-gradient(to right, #C0C0C0, #808080);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+/* 调整不同弦的粗细 */
+.string[data-string="1"]::before { 
+    height: 1px; 
+    top: 50%;
+    transform: translateY(-50%);
+}
+.string[data-string="2"]::before { 
+    height: 1.5px; 
+    top: 50%;
+    transform: translateY(-50%);
+}
+.string[data-string="3"]::before { 
+    height: 2px; 
+    top: 50%;
+    transform: translateY(-50%);
+}
+.string[data-string="4"]::before { 
+    height: 2.5px; 
+    top: 50%;
+    transform: translateY(-50%);
+}
+.string[data-string="5"]::before { 
+    height: 3px; 
+    top: 50%;
+    transform: translateY(-50%);
+}
+.string[data-string="6"]::before { 
+    height: 3.5px; 
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .fret {
-    background-color: #d2b48c; /* 品格颜色 */
+    background-color: transparent; /* 透明背景 */
     border-right: 2px solid #a0522d; /* 品丝颜色 */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: relative;
-    transition: background-color 0.3s;
+    transition: all 0.2s ease;
+    height: 40px;
+    flex: 1;
+    z-index: 2;
 }
 
 .fret:first-child {
@@ -175,24 +138,24 @@ button:disabled {
 }
 
 .fret.correct {
-    background-color: #2ecc71;
+    background-color: var(--td-success-color);
 }
 
 .fret.wrong {
-    background-color: #e74c3c;
+    background-color: var(--td-error-color);
 }
 
 .fret-markers {
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     gap: 2px;
-    margin-top: 5px;
+    margin-top: 10px;
     text-align: center;
 }
 
 .fret-marker {
     font-size: 12px;
-    color: #7f8c8d;
+    color: var(--td-text-color-secondary);
 }
 
 /* 反馈区域 */
@@ -205,48 +168,11 @@ button:disabled {
 }
 
 .feedback.correct {
-    color: #2ecc71;
+    color: var(--td-success-color);
 }
 
 .feedback.wrong {
-    color: #e74c3c;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .controls {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .settings {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .stats {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .fret {
-        height: 35px;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-    
-    .setting-group {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .fret {
-        height: 30px;
-    }
+    color: var(--td-error-color);
 }
 
 /* 特殊标记 */
@@ -259,11 +185,12 @@ button:disabled {
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: #7f8c8d;
+    background-color: #FFF8DC;
     border-radius: 50%;
     bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* 开放弦样式 */
@@ -272,9 +199,25 @@ button:disabled {
     border-right: 2px solid #bdc3c7;
 }
 
-footer {
-    text-align: center;
-    margin-top: 30px;
-    color: #7f8c8d;
-    font-size: 14px;
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .fret {
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .setting-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .fret {
+        height: 30px;
+    }
 }

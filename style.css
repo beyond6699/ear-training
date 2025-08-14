@@ -27,12 +27,19 @@ body {
     background-color: var(--td-bg-color-page);
     color: var(--td-text-color-primary);
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -90,6 +97,14 @@ main {
     grid-template-columns: 1fr 350px;
     gap: 30px;
     align-items: start;
+    flex: 1;
+}
+
+main.full-width {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
 }
 
 .practice-area {
@@ -97,6 +112,11 @@ main {
     padding: 30px;
     border-radius: var(--td-border-radius);
     box-shadow: var(--td-shadow);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .controls {
@@ -104,6 +124,8 @@ main {
     gap: 15px;
     margin-bottom: 30px;
     flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
 }
 
 .btn {
@@ -177,6 +199,8 @@ main {
 
 .question-info {
     margin-bottom: 30px;
+    width: 100%;
+    text-align: center;
 }
 
 .question-info h3 {
@@ -208,6 +232,7 @@ main {
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
+    justify-content: center;
 }
 
 .instrument-selector label {
@@ -225,6 +250,9 @@ main {
 
 .instrument-container {
     margin: 30px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* 钢琴键盘样式 */
@@ -233,13 +261,19 @@ main {
     background: #f8f8f8;
     border-radius: var(--td-border-radius);
     overflow-x: auto;
+    margin-bottom: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .piano-keyboard {
     position: relative;
     display: block;
-    min-width: 800px;
-    height: 200px;
+    min-width: 900px;
+    height: 220px;
     margin: 0 auto;
 }
 
@@ -348,12 +382,18 @@ main {
     background: #f8f8f8;
     border-radius: var(--td-border-radius);
     overflow-x: auto;
+    margin-bottom: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .guitar-fretboard {
     position: relative;
     min-width: 1200px;
-    height: 300px;
+    height: 320px;
     background: linear-gradient(to bottom, #8B4513, #A0522D);
     border-radius: 8px;
     margin: 0 auto;
@@ -487,6 +527,8 @@ main {
     padding: 20px;
     background: #f8f9fa;
     border-radius: var(--td-border-radius);
+    width: 100%;
+    text-align: center;
 }
 
 .selected-note {
@@ -508,6 +550,7 @@ main {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .result-message {
@@ -520,6 +563,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .result-message.correct {
@@ -638,6 +682,31 @@ main {
 .stat-rate.low {
     color: var(--td-success-color);
     font-weight: 500;
+}
+
+/* 简化的统计信息 */
+.mini-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: var(--td-border-radius);
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.mini-stats span {
+    font-size: 1rem;
+    color: var(--td-text-color-secondary);
+}
+
+.mini-stats span span {
+    font-weight: 600;
+    color: var(--td-brand-color);
+    margin-left: 5px;
 }
 
 /* 响应式设计 */

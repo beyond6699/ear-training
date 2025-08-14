@@ -6,19 +6,65 @@
     <title>单音符识别练习</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 在iframe中的特定样式 */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body.in-iframe {
+            height: auto;
+            min-height: 100%;
+        }
+        
+        .container.in-iframe {
+            height: auto;
+            padding: 10px;
+        }
+        
+        /* 调整钢琴键盘和吉他指板的大小 */
+        .in-iframe .piano-keyboard {
+            height: 180px;
+        }
+        
+        .in-iframe .piano-key.white {
+            height: 160px;
+        }
+        
+        .in-iframe .piano-key.black {
+            height: 100px;
+        }
+        
+        .in-iframe .guitar-fretboard {
+            height: 280px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🎹 单音符识别练习</h1>
-            <p>通过钢琴键盘识别C3-B4音域中的音符来训练你的音感</p>
-            <div class="nav-buttons">
-                <button class="nav-btn" onclick="location.href='index.html'">返回主页</button>
-                <button class="nav-btn active">单音符识别</button>
-            </div>
-        </header>
-
-        <main>
+    <script>
+        // 检测是否在iframe中
+        function inIframe() {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        }
+        
+        // 如果在iframe中，添加特定的类
+        if (inIframe()) {
+            document.body.classList.add('in-iframe');
+        }
+    </script>
+    <div class="container" id="mainContainer">
+        <script>
+            // 如果在iframe中，给container也添加特定的类
+            if (inIframe()) {
+                document.getElementById('mainContainer').classList.add('in-iframe');
+            }
+        </script>
+        <main class="full-width">
             <div class="practice-area">
                 <div class="controls">
                     <button id="playScale" class="btn btn-primary">播放C大调音阶</button>
@@ -68,41 +114,13 @@
                 </div>
 
                 <div id="result" class="result-message"></div>
-            </div>
-
-            <div class="stats-section">
-                <div class="score-display">
-                    <h3>练习统计</h3>
-                    <div class="score-grid">
-                        <div class="score-item">
-                            <span class="score-label">正确</span>
-                            <span class="score-value" id="correct">0</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="score-label">总计</span>
-                            <span class="score-value" id="total">0</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="score-label">准确率</span>
-                            <span class="score-value" id="accuracy">0%</span>
-                        </div>
-                    </div>
-                    <button id="resetStats" class="btn btn-outline btn-sm">重置统计</button>
-                </div>
-
-                <div class="detailed-stats">
-                    <h4>音符统计详情</h4>
-                    <div class="stats-controls">
-                        <label for="statsOctave">查看八度：</label>
-                        <select id="statsOctave">
-                            <option value="all">全部八度</option>
-                            <option value="2">第2八度</option>
-                            <option value="3">第3八度</option>
-                            <option value="4">第4八度</option>
-                            <option value="5">第5八度</option>
-                        </select>
-                    </div>
-                    <div id="statsGrid" class="stats-grid"></div>
+                
+                <!-- 简化的统计信息 -->
+                <div class="mini-stats">
+                    <span>正确: <span id="correct">0</span></span>
+                    <span>总计: <span id="total">0</span></span>
+                    <span>准确率: <span id="accuracy">0%</span></span>
+                    <button id="resetStats" class="btn btn-outline btn-sm">重置</button>
                 </div>
             </div>
         </main>

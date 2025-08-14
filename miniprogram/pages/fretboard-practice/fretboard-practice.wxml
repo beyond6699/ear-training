@@ -1,0 +1,46 @@
+<!--fretboard-practice.wxml-->
+<view class="container">
+  <view class="practice-area">
+    <view class="controls">
+      <view class="setting-group">
+        <text>难度：</text>
+        <picker bindchange="onDifficultyChange" value="{{difficultyIndex}}" range="{{difficulties}}">
+          <view class="picker">{{difficulties[difficultyIndex]}}</view>
+        </picker>
+      </view>
+      <view class="setting-group">
+        <text>品格范围：</text>
+        <picker bindchange="onFretRangeChange" value="{{fretRangeIndex}}" range="{{fretRanges}}">
+          <view class="picker">{{fretRanges[fretRangeIndex]}}</view>
+        </picker>
+      </view>
+      <button class="btn btn-primary" bindtap="startPractice" disabled="{{isPlaying}}">开始练习</button>
+      <button class="btn btn-secondary" bindtap="stopPractice" disabled="{{!isPlaying}}">停止</button>
+    </view>
+
+    <view class="question-info">
+      <view class="current-note">{{currentNote || '点击"开始练习"'}}</view>
+      <view class="timer-bar" wx:if="{{isPlaying}}">
+        <view class="timer-progress" style="width: {{timerProgress}}%"></view>
+      </view>
+    </view>
+
+    <view class="fretboard-container">
+      <view class="fretboard" id="fretboard">
+        <!-- 吉他指板将通过JavaScript动态生成 -->
+      </view>
+      <view class="fret-markers" id="fret-markers">
+        <!-- 品位标记将通过JavaScript动态生成 -->
+      </view>
+    </view>
+
+    <view class="feedback {{feedbackClass}}">{{feedback}}</view>
+    
+    <!-- 简化的统计信息 -->
+    <view class="mini-stats">
+      <text>正确: {{correctCount}}</text>
+      <text>错误: {{wrongCount}}</text>
+      <text>准确率: {{accuracy}}%</text>
+    </view>
+  </view>
+</view>
