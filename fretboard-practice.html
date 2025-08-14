@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吉他指板熟悉度练习</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="fretboard-style.css">
+</head>
+<body>
+    <header>
+        <h1>吉他指板熟悉度练习</h1>
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="location.href='index.html'">返回主页</button>
+            <button class="nav-btn active">吉他指板熟悉度</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="controls">
+            <div class="settings">
+                <div class="setting-group">
+                    <label for="difficulty">难度：</label>
+                    <select id="difficulty">
+                        <option value="easy">简单 (只有自然音)</option>
+                        <option value="medium" selected>中等 (包含升降号)</option>
+                        <option value="hard">困难 (所有音名，更快节奏)</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label for="fret-range">品格范围：</label>
+                    <select id="fret-range">
+                        <option value="0-5">0-5品</option>
+                        <option value="0-12" selected>0-12品</option>
+                        <option value="0-15">0-15品</option>
+                    </select>
+                </div>
+                <button id="start-btn">开始练习</button>
+                <button id="stop-btn" disabled>停止</button>
+            </div>
+            <div class="stats">
+                <div>正确：<span id="correct-count">0</span></div>
+                <div>错误：<span id="wrong-count">0</span></div>
+                <div>准确率：<span id="accuracy">0%</span></div>
+            </div>
+        </div>
+
+        <div class="current-note-display">
+            <div id="current-note">点击"开始练习"</div>
+            <div id="timer-bar"><div id="timer-progress"></div></div>
+        </div>
+
+        <div class="fretboard-container">
+            <div class="fretboard">
+                <!-- 吉他指板将通过JavaScript动态生成 -->
+            </div>
+            <div class="fret-markers">
+                <!-- 品位标记将通过JavaScript动态生成 -->
+            </div>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+    </main>
+
+    <footer>
+        <p>吉他指板熟悉度练习 - 提高您对吉他指板的记忆</p>
+    </footer>
+
+    <script src="fretboard-script.js"></script>
+</body>
+</html>

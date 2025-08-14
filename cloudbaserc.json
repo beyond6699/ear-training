@@ -1,0 +1,18 @@
+{
+  "envId": "",
+  "version": "2.0",
+  "framework": {
+    "name": "音乐练习中心",
+    "plugins": {
+      "client": {
+        "use": "@cloudbase/framework-plugin-website",
+        "inputs": {
+          "outputPath": "temp_deploy",
+          "cloudPath": "/",
+          "envVariables": {},
+          "ignore": [".git", ".github", "node_modules", ".cloudbase"]
+        }
+      }
+    }
+  }
+}

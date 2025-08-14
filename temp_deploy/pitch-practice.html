@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单音符识别练习</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎹 单音符识别练习</h1>
+            <p>通过钢琴键盘识别C3-B4音域中的音符来训练你的音感</p>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="location.href='index.html'">返回主页</button>
+                <button class="nav-btn active">单音符识别</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="practice-area">
+                <div class="controls">
+                    <button id="playScale" class="btn btn-primary">播放C大调音阶</button>
+                    <button id="playReference" class="btn btn-secondary">播放参考音 (C4)</button>
+                    <button id="playTarget" class="btn btn-accent">播放目标音</button>
+                </div>
+
+                <div class="question-info">
+                    <div class="instrument-selector">
+                        <label for="instrumentSelect">选择乐器：</label>
+                        <select id="instrumentSelect">
+                            <option value="piano">钢琴键盘</option>
+                            <option value="guitar">吉他指板</option>
+                        </select>
+                    </div>
+                    <h3 id="instructionText">请在钢琴键盘上选择你听到的音符：</h3>
+                    <p class="range-info" id="rangeInfo">音域范围：C3 - B4（两个八度）</p>
+                </div>
+
+                <!-- 乐器界面 -->
+                <div class="instrument-container">
+                    <!-- 钢琴键盘 -->
+                    <div class="piano-container" id="pianoContainer">
+                        <div class="piano-keyboard" id="pianoKeyboard">
+                            <!-- 键盘将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 吉他指板 -->
+                    <div class="guitar-container" id="guitarContainer" style="display: none;">
+                        <div class="guitar-fretboard" id="guitarFretboard">
+                            <!-- 指板将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="answer-section">
+                    <div class="selected-note">
+                        <span>已选择：</span>
+                        <span id="selectedNote">请选择一个音符</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button id="clearSelection" class="btn btn-outline">清除选择</button>
+                        <button id="submitAnswer" class="btn btn-success" disabled>提交答案</button>
+                        <button id="newQuestion" class="btn btn-primary" disabled>下一题</button>
+                    </div>
+                </div>
+
+                <div id="result" class="result-message"></div>
+            </div>
+
+            <div class="stats-section">
+                <div class="score-display">
+                    <h3>练习统计</h3>
+                    <div class="score-grid">
+                        <div class="score-item">
+                            <span class="score-label">正确</span>
+                            <span class="score-value" id="correct">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">总计</span>
+                            <span class="score-value" id="total">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">准确率</span>
+                            <span class="score-value" id="accuracy">0%</span>
+                        </div>
+                    </div>
+                    <button id="resetStats" class="btn btn-outline btn-sm">重置统计</button>
+                </div>
+
+                <div class="detailed-stats">
+                    <h4>音符统计详情</h4>
+                    <div class="stats-controls">
+                        <label for="statsOctave">查看八度：</label>
+                        <select id="statsOctave">
+                            <option value="all">全部八度</option>
+                            <option value="2">第2八度</option>
+                            <option value="3">第3八度</option>
+                            <option value="4">第4八度</option>
+                            <option value="5">第5八度</option>
+                        </select>
+                    </div>
+                    <div id="statsGrid" class="stats-grid"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

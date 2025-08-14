@@ -1,20 +1,20 @@
 {
-  "path": "c:\\Users\\lightrayli\\codebuddy\\20250812172504",
-  "desc": "这是一个音感练习器前端项目，提供单音符识别、和弦识别和和弦调性练习功能。现已在和弦识别和和弦调性练习中都添加了半音关系图表功能。",
-  "id": "743bb0cda5d64981be583b49152260bd",
+  "path": "c:\\Users\\lightrayli\\codebuddy\\20250812172504\\temp_deploy",
+  "desc": "这是一个音乐练习中心前端项目，提供多种音乐练习模式，包括单音符识别、和弦识别、和弦调性和吉他指板熟悉度训练等功能。",
+  "id": "16fcb824425a4125b461032992de9c1d",
   "data": {
-    "spaceKey": "743bb0cda5d64981be583b49152260bd",
+    "spaceKey": "16fcb824425a4125b461032992de9c1d",
     "connections": {
-      "webIDE": "https://743bb0cda5d64981be583b49152260bd.ap-singapore.cloudstudio.club",
+      "webIDE": "https://16fcb824425a4125b461032992de9c1d.ap-singapore.cloudstudio.club",
       "preview": "",
-      "api": "https://743bb0cda5d64981be583b49152260bd--api.ap-singapore.cloudstudio.club",
-      "pty": "https://743bb0cda5d64981be583b49152260bd--pty.ap-singapore.cloudstudio.club"
+      "api": "https://16fcb824425a4125b461032992de9c1d--api.ap-singapore.cloudstudio.club",
+      "pty": "https://16fcb824425a4125b461032992de9c1d--pty.ap-singapore.cloudstudio.club"
     }
   },
   "config": {
-    "api": "https://743bb0cda5d64981be583b49152260bd--api.ap-singapore.cloudstudio.club",
-    "pty": "https://743bb0cda5d64981be583b49152260bd--pty.ap-singapore.cloudstudio.club",
+    "api": "https://16fcb824425a4125b461032992de9c1d--api.ap-singapore.cloudstudio.club",
+    "pty": "https://16fcb824425a4125b461032992de9c1d--pty.ap-singapore.cloudstudio.club",
     "region": "ap-shanghai",
-    "spaceKey": "743bb0cda5d64981be583b49152260bd"
+    "spaceKey": "16fcb824425a4125b461032992de9c1d"
   }
 }
