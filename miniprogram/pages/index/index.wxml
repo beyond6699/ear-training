@@ -16,6 +16,16 @@
       <image src="/images/guitar.png" mode="aspectFit"></image>
       <text>吉他指板熟悉度</text>
     </view>
+    
+    <view class="practice-item" bindtap="navigateToChordTypePractice">
+      <image src="/images/piano.png" mode="aspectFit"></image>
+      <text>和弦调性练习</text>
+    </view>
+    
+    <view class="practice-item" bindtap="navigateToPitchPractice">
+      <image src="/images/piano.png" mode="aspectFit"></image>
+      <text>音高训练</text>
+    </view>
   </view>
 
   <view class="footer">

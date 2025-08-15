@@ -392,41 +392,154 @@ Page({
     return description;
   },
 
+  // 获取音符频率
+  getNoteFrequency: function(note) {
+    // 提取音符名称和八度（例如：C4, D♯3）
+    const noteName = note.replace(/\d+$/, '');
+    const octave = parseInt(note.match(/\d+$/) || ['4'][0]);
+    
+    // 基础频率映射（基于A4 = 440Hz）
+    const baseFrequencies = {
+      'C': 261.63,
+      'C♯': 277.18,
+      'D♭': 277.18,
+      'D': 293.66,
+      'D♯': 311.13,
+      'E♭': 311.13,
+      'E': 329.63,
+      'F': 349.23,
+      'F♯': 369.99,
+      'G♭': 369.99,
+      'G': 392.00,
+      'G♯': 415.30,
+      'A♭': 415.30,
+      'A': 440.00,
+      'A♯': 466.16,
+      'B♭': 466.16,
+      'B': 493.88
+    };
+    
+    // 获取基础频率
+    let frequency = baseFrequencies[noteName] || 440;
+    
+    // 根据八度调整频率
+    const octaveDiff = octave - 4; // 相对于第4个八度
+    if (octaveDiff !== 0) {
+      frequency *= Math.pow(2, octaveDiff);
+    }
+    
+    return frequency;
+  },
+  
+  // 播放音符
+  playTone: function(frequency, duration = 500) {
+    const audioCtx = wx.createWebAudioContext();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    oscillator.type = 'sine'; // 正弦波
+    oscillator.frequency.value = frequency; // 设置频率
+    
+    // 设置音量渐变
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.01);
+    gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + duration / 1000);
+    
+    // 连接节点
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    // 开始播放
+    oscillator.start();
+    
+    // 设置定时器停止播放
+    setTimeout(() => {
+      oscillator.stop();
+      audioCtx.close();
+    }, duration);
+    
+    return { oscillator, audioCtx };
+  },
+
   // 播放和弦
   playChord: function() {
-    // 在实际应用中，这里应该使用微信小程序的音频API播放和弦
-    // 由于微信小程序不支持直接生成音频，这里只是一个占位函数
     console.log('播放和弦:', this.currentChord);
     
-    // 模拟播放和弦的效果
-    wx.showToast({
-      title: '播放和弦',
-      icon: 'none',
-      duration: 1000
-    });
+    try {
+      // 获取和弦中的音符频率
+      const frequencies = this.currentChord.notes.map(note => 
+        this.getNoteFrequency(`${note.name}${note.octave}`)
+      );
+      
+      // 同时播放所有音符
+      frequencies.forEach(freq => {
+        this.playTone(freq, 1000);
+      });
+      
+      // 显示提示
+      wx.showToast({
+        title: '播放和弦: ' + this.currentChord.root + this.currentChord.type.name,
+        icon: 'none',
+        duration: 2000
+      });
+    } catch (error) {
+      console.error('播放和弦错误:', error);
+      wx.showToast({
+        title: '播放失败，请重试',
+        icon: 'none',
+        duration: 1000
+      });
+    }
   },
 
   // 播放琶音
   playArpeggio: function() {
     if (!this.data.canPlayArpeggio) return;
     
-    // 在实际应用中，这里应该使用微信小程序的音频API播放琶音
-    // 由于微信小程序不支持直接生成音频，这里只是一个占位函数
     console.log('播放琶音:', this.currentChord);
     
-    // 模拟播放琶音的效果
-    wx.showToast({
-      title: '播放琶音',
-      icon: 'none',
-      duration: 1000
-    });
+    try {
+      // 获取和弦中的音符频率
+      const frequencies = this.currentChord.notes.map(note => 
+        this.getNoteFrequency(`${note.name}${note.octave}`)
+      );
+      
+      // 依次播放音符（琶音效果）
+      frequencies.forEach((freq, index) => {
+        setTimeout(() => {
+          this.playTone(freq, 500);
+        }, index * 300);
+      });
+      
+      // 显示提示
+      wx.showToast({
+        title: '播放琶音: ' + this.currentChord.root + this.currentChord.type.name,
+        icon: 'none',
+        duration: 2000
+      });
+    } catch (error) {
+      console.error('播放琶音错误:', error);
+      wx.showToast({
+        title: '播放失败，请重试',
+        icon: 'none',
+        duration: 1000
+      });
+    }
   },
 
   // 播放单个音符
   playNote: function(note) {
-    // 在实际应用中，这里应该使用微信小程序的音频API播放音符
-    // 由于微信小程序不支持直接生成音频，这里只是一个占位函数
     console.log('播放音符:', note);
+    
+    try {
+      // 获取音符频率
+      const frequency = this.getNoteFrequency(note);
+      
+      // 播放音符
+      this.playTone(frequency, 500);
+    } catch (error) {
+      console.error('播放音符错误:', error);
+    }
   },
 
   // 下一题

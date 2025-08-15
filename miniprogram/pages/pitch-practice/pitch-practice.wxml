@@ -1,2 +1,68 @@
 <!--pages/pitch-practice/pitch-practice.wxml-->
-<text>pages/pitch-practice/pitch-practice.wxml</text>
+<view class="container">
+  <view class="header">
+    <view class="title">音高训练</view>
+    <view class="subtitle">提升您的音高识别能力</view>
+  </view>
+
+  <view class="practice-area">
+    <view class="controls">
+      <button class="btn btn-primary" bindtap="playNote">播放音符</button>
+      <button class="btn btn-secondary" bindtap="playReference">播放参考音</button>
+    </view>
+
+    <view class="question-info">
+      <view class="subtitle">请识别播放的音符：</view>
+      <view class="note-info">
+        <text>参考音：</text>
+        <text class="reference-note">A4 (440Hz)</text>
+      </view>
+    </view>
+
+    <view class="piano-mini">
+      <view class="piano-keys">
+        <view class="key white" bindtap="selectNote" data-note="C">C</view>
+        <view class="key black" bindtap="selectNote" data-note="C♯/D♭">C♯/D♭</view>
+        <view class="key white" bindtap="selectNote" data-note="D">D</view>
+        <view class="key black" bindtap="selectNote" data-note="D♯/E♭">D♯/E♭</view>
+        <view class="key white" bindtap="selectNote" data-note="E">E</view>
+        <view class="key white" bindtap="selectNote" data-note="F">F</view>
+        <view class="key black" bindtap="selectNote" data-note="F♯/G♭">F♯/G♭</view>
+        <view class="key white" bindtap="selectNote" data-note="G">G</view>
+        <view class="key black" bindtap="selectNote" data-note="G♯/A♭">G♯/A♭</view>
+        <view class="key white" bindtap="selectNote" data-note="A">A</view>
+        <view class="key black" bindtap="selectNote" data-note="A♯/B♭">A♯/B♭</view>
+        <view class="key white" bindtap="selectNote" data-note="B">B</view>
+      </view>
+    </view>
+
+    <view class="octave-selector">
+      <text>八度：</text>
+      <view class="octave-buttons">
+        <view class="octave-button" bindtap="selectOctave" data-octave="3">3</view>
+        <view class="octave-button active" bindtap="selectOctave" data-octave="4">4</view>
+        <view class="octave-button" bindtap="selectOctave" data-octave="5">5</view>
+      </view>
+    </view>
+
+    <view class="selected-answer">
+      <text>您的答案：</text>
+      <text class="selected-note">{{selectedNote || '请选择音符'}}</text>
+    </view>
+
+    <view class="action-buttons">
+      <button class="btn btn-success" bindtap="submitAnswer">提交答案</button>
+      <button class="btn btn-primary" bindtap="nextQuestion" disabled="{{!showNextButton}}">下一题</button>
+    </view>
+
+    <view class="result-message {{resultClass}}">{{resultMessage}}</view>
+    
+    <!-- 简化的统计信息 -->
+    <view class="mini-stats">
+      <text>正确: {{correctCount}}</text>
+      <text>总计: {{totalCount}}</text>
+      <text>准确率: {{accuracy}}%</text>
+      <button class="btn btn-outline btn-sm" bindtap="resetStats">重置</button>
+    </view>
+  </view>
+</view>

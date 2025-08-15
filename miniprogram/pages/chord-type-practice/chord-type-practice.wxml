@@ -1,2 +1,46 @@
 <!--pages/chord-type-practice/chord-type-practice.wxml-->
-<text>pages/chord-type-practice/chord-type-practice.wxml</text>
+<view class="container">
+  <view class="header">
+    <view class="title">和弦调性练习</view>
+    <view class="subtitle">识别和弦在调性中的功能</view>
+  </view>
+
+  <view class="practice-area">
+    <view class="controls">
+      <button class="btn btn-primary" bindtap="playProgression">播放和弦进行</button>
+      <button class="btn btn-secondary" bindtap="playCurrentChord">播放当前和弦</button>
+    </view>
+
+    <view class="question-info">
+      <view class="subtitle">请识别以下和弦在C大调中的功能：</view>
+      <view class="chord-info">
+        <text>当前和弦：</text>
+        <text class="chord-type">F大七和弦</text>
+      </view>
+    </view>
+
+    <view class="options-grid">
+      <view class="option-item" bindtap="selectOption" data-option="I">I 级</view>
+      <view class="option-item" bindtap="selectOption" data-option="ii">ii 级</view>
+      <view class="option-item" bindtap="selectOption" data-option="iii">iii 级</view>
+      <view class="option-item" bindtap="selectOption" data-option="IV">IV 级</view>
+      <view class="option-item" bindtap="selectOption" data-option="V">V 级</view>
+      <view class="option-item" bindtap="selectOption" data-option="vi">vi 级</view>
+      <view class="option-item" bindtap="selectOption" data-option="vii°">vii° 级</view>
+    </view>
+
+    <view class="result-message">请选择和弦的功能</view>
+    
+    <view class="action-buttons">
+      <button class="btn btn-success" bindtap="nextQuestion">下一题</button>
+    </view>
+
+    <!-- 简化的统计信息 -->
+    <view class="mini-stats">
+      <text>正确: 0</text>
+      <text>总计: 0</text>
+      <text>准确率: 0%</text>
+      <button class="btn btn-outline btn-sm" bindtap="resetStats">重置</button>
+    </view>
+  </view>
+</view>

@@ -22,6 +22,20 @@ Page({
     });
   },
   
+  // 导航到和弦调性练习页面
+  navigateToChordTypePractice: function() {
+    wx.navigateTo({
+      url: '/pages/chord-type-practice/chord-type-practice'
+    });
+  },
+  
+  // 导航到音高训练页面
+  navigateToPitchPractice: function() {
+    wx.navigateTo({
+      url: '/pages/pitch-practice/pitch-practice'
+    });
+  },
+  
   onShareAppMessage: function() {
     // 用户点击右上角分享
     return {
